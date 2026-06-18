@@ -1,0 +1,46 @@
+{
+  "dataset_name": "huggan/wikiart",
+  "split": "train",
+  "total_rows": 81444,
+  "summaries": {
+    "artist": {
+      "num_labels": 129,
+      "num_nonzero_labels": 129,
+      "largest_label": "Unknown Artist",
+      "largest_count": 41914,
+      "largest_percent": 51.4636,
+      "smallest_nonzero_label": "canaletto",
+      "smallest_nonzero_count": 42,
+      "top_10_share_percent": 64.4455,
+      "single_sample_labels": 0,
+      "labels_under_10_samples": 0,
+      "labels_under_50_samples": 2
+    },
+    "genre": {
+      "num_labels": 11,
+      "num_nonzero_labels": 11,
+      "largest_label": "Unknown Genre",
+      "largest_count": 16452,
+      "largest_percent": 20.2004,
+      "smallest_nonzero_label": "illustration",
+      "smallest_nonzero_count": 1902,
+      "top_10_share_percent": 97.6647,
+      "single_sample_labels": 0,
+      "labels_under_10_samples": 0,
+      "labels_under_50_samples": 0
+    },
+    "style": {
+      "num_labels": 27,
+      "num_nonzero_labels": 27,
+      "largest_label": "Impressionism",
+      "largest_count": 13060,
+      "largest_percent": 16.0356,
+      "smallest_nonzero_label": "Action_painting",
+      "smallest_nonzero_count": 98,
+      "top_10_share_percent": 76.6588,
+      "single_sample_labels": 0,
+      "labels_under_10_samples": 0,
+      "labels_under_50_samples": 0
+    }
+  }
+}
