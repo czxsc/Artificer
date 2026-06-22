@@ -1,6 +1,24 @@
 # Artificer
 AI-Powered Art History App that classifies paintings and retrieves relevant historical context
 
+## Current Foundation Workflow
+
+Install the Phase 0/1 Python dependencies with `pip install -r requirements.txt`.
+
+### Phase 0
+
+- Audit WikiArt labels and dataset imbalance with `python src/dataset_analysis.py`
+- Build the clean Phase 0 datasets with `python src/setup_phase0_datasets.py`
+- Default behavior removes `Unknown Artist` rows and keeps `Unknown Genre`
+- This writes `train`, `val`, `known_artworks_test`, and `degraded_known_artworks` manifests to `outputs/phase0/`
+- Materialize degraded test images with `python src/materialize_degraded_test_set.py`
+
+### Phase 1
+
+- Train the first frozen-CLIP baseline with `python src/train_clip_classifier.py`
+- The baseline uses `openai/clip-vit-base-patch32` image embeddings and separate heads for artist, genre, and style
+- Outputs are written to `outputs/phase1/`
+
 # Phase 1: Which Vision Architecture Best Understand Paintings
 
 **Objective:** Evaluate whether foundation-model representations (CLIP) or fully fine-tuned vision models (ResNet/ViT) are better at recognizing artistic characteristics from paintings.

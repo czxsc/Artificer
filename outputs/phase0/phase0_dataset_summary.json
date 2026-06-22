@@ -1,0 +1,106 @@
+{
+  "seed": 42,
+  "test_size": 0.1,
+  "val_size": 0.1,
+  "min_combo_count": 5,
+  "unknown_artist_removed": true,
+  "removed_unknown_artist_rows": 41914,
+  "filtered_dataset_summary": {
+    "rows": 39530,
+    "unique_artists": 128,
+    "unique_styles": 25,
+    "unique_genres": 11,
+    "unknown_artist_rows": 0,
+    "unknown_genre_rows": 2669,
+    "largest_artist_label": "vincent-van-gogh",
+    "largest_artist_count": 1889,
+    "largest_style_label": "Impressionism",
+    "largest_style_count": 9202,
+    "largest_genre_label": "portrait",
+    "largest_genre_count": 8561
+  },
+  "split_summary": {
+    "train": {
+      "rows": 31662,
+      "unique_artists": 128,
+      "unique_genres": 11,
+      "unique_styles": 25,
+      "unknown_artist_rows": 0,
+      "unknown_genre_rows": 2132
+    },
+    "val": {
+      "rows": 3934,
+      "unique_artists": 128,
+      "unique_genres": 11,
+      "unique_styles": 23,
+      "unknown_artist_rows": 0,
+      "unknown_genre_rows": 270
+    },
+    "known_artworks_test": {
+      "rows": 3934,
+      "unique_artists": 128,
+      "unique_genres": 11,
+      "unique_styles": 23,
+      "unknown_artist_rows": 0,
+      "unknown_genre_rows": 267
+    }
+  },
+  "label_coverage": {
+    "val": {
+      "artist": {
+        "present_count": 128,
+        "full_count": 128,
+        "missing_labels": []
+      },
+      "style": {
+        "present_count": 23,
+        "full_count": 25,
+        "missing_labels": [
+          "Contemporary_Realism",
+          "Minimalism"
+        ]
+      },
+      "genre": {
+        "present_count": 11,
+        "full_count": 11,
+        "missing_labels": []
+      }
+    },
+    "known_artworks_test": {
+      "artist": {
+        "present_count": 128,
+        "full_count": 128,
+        "missing_labels": []
+      },
+      "style": {
+        "present_count": 23,
+        "full_count": 25,
+        "missing_labels": [
+          "Contemporary_Realism",
+          "Minimalism"
+        ]
+      },
+      "genre": {
+        "present_count": 11,
+        "full_count": 11,
+        "missing_labels": []
+      }
+    }
+  },
+  "degraded_known_artworks": {
+    "source_rows": 3934,
+    "recipes": [
+      "gaussian_blur",
+      "strong_gaussian_blur",
+      "small_center_crop",
+      "medium_center_crop",
+      "warm_shift",
+      "desaturated",
+      "tilt_left",
+      "tilt_right",
+      "perspective_left",
+      "perspective_right"
+    ],
+    "total_rows": 39340
+  }
+}

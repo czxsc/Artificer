@@ -1,53 +1,15 @@
 from __future__ import annotations
 
 import json
-import os
 from collections import Counter
 from pathlib import Path
 
 import pandas as pd
-from datasets import Dataset, concatenate_datasets, load_dataset
+
+from wikiart_utils import DATASET_NAME, DATASET_SPLIT, load_wikiart_dataset
 
 
-DATASET_NAME = "huggan/wikiart"
-DATASET_SPLIT = "train"
 OUTPUT_DIR = Path(__file__).resolve().parents[1] / "outputs" / "dataset_analysis"
-CACHE_ROOT = (
-    Path(os.environ["USERPROFILE"])
-    / ".cache"
-    / "huggingface"
-    / "datasets"
-    / "huggan___wikiart"
-    / "default"
-)
-
-
-def load_local_cached_dataset() -> Dataset | None:
-    if not CACHE_ROOT.exists():
-        return None
-
-    candidates = []
-    for dataset_info in CACHE_ROOT.rglob("dataset_info.json"):
-        parent = dataset_info.parent
-        if list(parent.glob("wikiart-train-*.arrow")):
-            candidates.append(parent)
-
-    if not candidates:
-        return None
-
-    latest_revision = max(candidates, key=lambda path: path.stat().st_mtime)
-    arrow_files = sorted(latest_revision.glob("wikiart-train-*.arrow"))
-
-    shards = [Dataset.from_file(str(path)) for path in arrow_files]
-    return concatenate_datasets(shards)
-
-
-def load_wikiart_dataset() -> Dataset:
-    cached_dataset = load_local_cached_dataset()
-    if cached_dataset is not None:
-        return cached_dataset
-
-    return load_dataset(DATASET_NAME, split=DATASET_SPLIT)
 
 
 def build_distribution_frame(

@@ -1,0 +1,31 @@
+{
+  "seed": 42,
+  "dataset_rows": 81444,
+  "test_size": 0.1,
+  "val_size": 0.1,
+  "min_combo_count": 5,
+  "drop_unknown_artist": false,
+  "split_summary": {
+    "train": {
+      "rows": 65162,
+      "unique_artists": 129,
+      "unique_genres": 11,
+      "unique_styles": 27,
+      "unknown_artist_rows": 33540
+    },
+    "val": {
+      "rows": 8141,
+      "unique_artists": 129,
+      "unique_genres": 11,
+      "unique_styles": 27,
+      "unknown_artist_rows": 4188
+    },
+    "test": {
+      "rows": 8141,
+      "unique_artists": 129,
+      "unique_genres": 11,
+      "unique_styles": 27,
+      "unknown_artist_rows": 4186
+    }
+  }
+}
