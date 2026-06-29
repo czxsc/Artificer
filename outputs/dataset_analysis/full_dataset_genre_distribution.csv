@@ -1,0 +1,12 @@
+dataset_variant,label_type,label,count,percent
+full_dataset,genre,Unknown Genre,16452,20.2004
+full_dataset,genre,portrait,14112,17.3272
+full_dataset,genre,landscape,13358,16.4015
+full_dataset,genre,genre_painting,10859,13.3331
+full_dataset,genre,religious_painting,6538,8.0276
+full_dataset,genre,abstract_painting,4968,6.0999
+full_dataset,genre,cityscape,4602,5.6505
+full_dataset,genre,sketch_and_study,3942,4.8401
+full_dataset,genre,still_life,2788,3.4232
+full_dataset,genre,nude_painting,1923,2.3611
+full_dataset,genre,illustration,1902,2.3353

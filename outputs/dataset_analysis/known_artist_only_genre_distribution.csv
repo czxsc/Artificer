@@ -1,0 +1,12 @@
+dataset_variant,label_type,label,count,percent
+known_artist_only,genre,portrait,8561,21.657
+known_artist_only,genre,landscape,8398,21.2446
+known_artist_only,genre,genre_painting,6104,15.4414
+known_artist_only,genre,religious_painting,3507,8.8717
+known_artist_only,genre,sketch_and_study,3178,8.0395
+known_artist_only,genre,cityscape,2812,7.1136
+known_artist_only,genre,Unknown Genre,2669,6.7518
+known_artist_only,genre,still_life,1567,3.9641
+known_artist_only,genre,illustration,1181,2.9876
+known_artist_only,genre,nude_painting,1052,2.6613
+known_artist_only,genre,abstract_painting,501,1.2674

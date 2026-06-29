@@ -1,46 +1,98 @@
 {
   "dataset_name": "huggan/wikiart",
   "split": "train",
-  "total_rows": 81444,
+  "variant_row_counts": {
+    "full_dataset": 81444,
+    "known_artist_only": 39530
+  },
   "summaries": {
-    "artist": {
-      "num_labels": 129,
-      "num_nonzero_labels": 129,
-      "largest_label": "Unknown Artist",
-      "largest_count": 41914,
-      "largest_percent": 51.4636,
-      "smallest_nonzero_label": "canaletto",
-      "smallest_nonzero_count": 42,
-      "top_10_share_percent": 64.4455,
-      "single_sample_labels": 0,
-      "labels_under_10_samples": 0,
-      "labels_under_50_samples": 2
+    "full_dataset": {
+      "artist": {
+        "total_rows": 81444,
+        "num_labels": 129,
+        "num_nonzero_labels": 129,
+        "largest_label": "Unknown Artist",
+        "largest_count": 41914,
+        "largest_percent": 51.4636,
+        "smallest_nonzero_label": "canaletto",
+        "smallest_nonzero_count": 42,
+        "top_10_share_percent": 64.4455,
+        "single_sample_labels": 0,
+        "labels_under_10_samples": 0,
+        "labels_under_50_samples": 2
+      },
+      "genre": {
+        "total_rows": 81444,
+        "num_labels": 11,
+        "num_nonzero_labels": 11,
+        "largest_label": "Unknown Genre",
+        "largest_count": 16452,
+        "largest_percent": 20.2004,
+        "smallest_nonzero_label": "illustration",
+        "smallest_nonzero_count": 1902,
+        "top_10_share_percent": 97.6647,
+        "single_sample_labels": 0,
+        "labels_under_10_samples": 0,
+        "labels_under_50_samples": 0
+      },
+      "style": {
+        "total_rows": 81444,
+        "num_labels": 27,
+        "num_nonzero_labels": 27,
+        "largest_label": "Impressionism",
+        "largest_count": 13060,
+        "largest_percent": 16.0356,
+        "smallest_nonzero_label": "Action_painting",
+        "smallest_nonzero_count": 98,
+        "top_10_share_percent": 76.6588,
+        "single_sample_labels": 0,
+        "labels_under_10_samples": 0,
+        "labels_under_50_samples": 0
+      }
     },
-    "genre": {
-      "num_labels": 11,
-      "num_nonzero_labels": 11,
-      "largest_label": "Unknown Genre",
-      "largest_count": 16452,
-      "largest_percent": 20.2004,
-      "smallest_nonzero_label": "illustration",
-      "smallest_nonzero_count": 1902,
-      "top_10_share_percent": 97.6647,
-      "single_sample_labels": 0,
-      "labels_under_10_samples": 0,
-      "labels_under_50_samples": 0
-    },
-    "style": {
-      "num_labels": 27,
-      "num_nonzero_labels": 27,
-      "largest_label": "Impressionism",
-      "largest_count": 13060,
-      "largest_percent": 16.0356,
-      "smallest_nonzero_label": "Action_painting",
-      "smallest_nonzero_count": 98,
-      "top_10_share_percent": 76.6588,
-      "single_sample_labels": 0,
-      "labels_under_10_samples": 0,
-      "labels_under_50_samples": 0
+    "known_artist_only": {
+      "artist": {
+        "total_rows": 39530,
+        "num_labels": 129,
+        "num_nonzero_labels": 128,
+        "largest_label": "vincent-van-gogh",
+        "largest_count": 1889,
+        "largest_percent": 4.7786,
+        "smallest_nonzero_label": "canaletto",
+        "smallest_nonzero_count": 42,
+        "top_10_share_percent": 28.6744,
+        "single_sample_labels": 0,
+        "labels_under_10_samples": 1,
+        "labels_under_50_samples": 3
+      },
+      "genre": {
+        "total_rows": 39530,
+        "num_labels": 11,
+        "num_nonzero_labels": 11,
+        "largest_label": "portrait",
+        "largest_count": 8561,
+        "largest_percent": 21.657,
+        "smallest_nonzero_label": "abstract_painting",
+        "smallest_nonzero_count": 501,
+        "top_10_share_percent": 98.7326,
+        "single_sample_labels": 0,
+        "labels_under_10_samples": 0,
+        "labels_under_50_samples": 0
+      },
+      "style": {
+        "total_rows": 39530,
+        "num_labels": 27,
+        "num_nonzero_labels": 25,
+        "largest_label": "Impressionism",
+        "largest_count": 9202,
+        "largest_percent": 23.2785,
+        "smallest_nonzero_label": "Minimalism",
+        "smallest_nonzero_count": 5,
+        "top_10_share_percent": 88.9831,
+        "single_sample_labels": 0,
+        "labels_under_10_samples": 3,
+        "labels_under_50_samples": 4
+      }
     }
   }
 }
