@@ -3,20 +3,19 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from dataclasses import dataclass
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn.functional as F
-from torch import nn
 from torch.utils.data import DataLoader, Dataset
-from transformers import CLIPModel, CLIPProcessor
+from transformers import CLIPProcessor
 
 from data.wikiart_utils import load_wikiart_dataset
+from ml.models.clip.classifier import ClassificationHead, LabelVocab, MultiHeadClipClassifier
 
 
 OUTPUT_DIR = Path(__file__).resolve().parents[1] / "outputs" / "phase1"
@@ -53,21 +52,6 @@ def set_seed(seed: int) -> None:
         torch.cuda.manual_seed_all(seed)
 
 
-@dataclass
-class LabelVocab:
-    artist_to_idx: dict[str, int]
-    genre_to_idx: dict[str, int]
-    style_to_idx: dict[str, int]
-
-    @classmethod
-    def from_frame(cls, frame: pd.DataFrame) -> "LabelVocab":
-        return cls(
-            artist_to_idx={label: idx for idx, label in enumerate(sorted(frame["artist"].unique()))},
-            genre_to_idx={label: idx for idx, label in enumerate(sorted(frame["genre"].unique()))},
-            style_to_idx={label: idx for idx, label in enumerate(sorted(frame["style"].unique()))},
-        )
-
-
 class WikiArtSplitDataset(Dataset):
     def __init__(
         self,
@@ -95,67 +79,6 @@ class WikiArtSplitDataset(Dataset):
             "artist": torch.tensor(self.vocab.artist_to_idx[row["artist"]], dtype=torch.long),
             "genre": torch.tensor(self.vocab.genre_to_idx[row["genre"]], dtype=torch.long),
             "style": torch.tensor(self.vocab.style_to_idx[row["style"]], dtype=torch.long),
-        }
-
-
-class ClassificationHead(nn.Module):
-    def __init__(
-        self,
-        input_dim: int,
-        output_dim: int,
-        head_type: str,
-        hidden_dim: int,
-        dropout: float,
-    ) -> None:
-        super().__init__()
-        if head_type == "linear":
-            self.layers = nn.Linear(input_dim, output_dim)
-        else:
-            self.layers = nn.Sequential(
-                nn.Linear(input_dim, hidden_dim),
-                nn.GELU(),
-                nn.Dropout(dropout),
-                nn.Linear(hidden_dim, output_dim),
-            )
-
-    def forward(self, inputs: torch.Tensor) -> torch.Tensor:
-        return self.layers(inputs)
-
-
-class MultiHeadClipClassifier(nn.Module):
-    def __init__(
-        self,
-        model_name: str,
-        vocab: LabelVocab,
-        head_type: str,
-        hidden_dim: int,
-        dropout: float,
-    ) -> None:
-        super().__init__()
-        self.encoder = CLIPModel.from_pretrained(model_name)
-        self.encoder.requires_grad_(False)
-        embed_dim = self.encoder.config.projection_dim
-
-        self.artist_head = ClassificationHead(
-            embed_dim, len(vocab.artist_to_idx), head_type, hidden_dim, dropout
-        )
-        self.genre_head = ClassificationHead(
-            embed_dim, len(vocab.genre_to_idx), head_type, hidden_dim, dropout
-        )
-        self.style_head = ClassificationHead(
-            embed_dim, len(vocab.style_to_idx), head_type, hidden_dim, dropout
-        )
-
-    def encode_images(self, pixel_values: torch.Tensor) -> torch.Tensor:
-        image_features = self.encoder.get_image_features(pixel_values=pixel_values)
-        return F.normalize(image_features, dim=-1)
-
-    def forward(self, pixel_values: torch.Tensor) -> dict[str, torch.Tensor]:
-        embeddings = self.encode_images(pixel_values)
-        return {
-            "artist": self.artist_head(embeddings),
-            "genre": self.genre_head(embeddings),
-            "style": self.style_head(embeddings),
         }
 
 
