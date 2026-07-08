@@ -98,13 +98,22 @@ class MultiHeadClipClassifier(nn.Module):
         image_features = self.encoder.visual_projection(vision_outputs.pooler_output)
         return F.normalize(image_features, dim=-1)
 
-    def forward(self, pixel_values: torch.Tensor) -> dict[str, torch.Tensor]:
-        embeddings = self.encode_images(pixel_values)
+    def classify_embeddings(self, embeddings: torch.Tensor) -> dict[str, torch.Tensor]:
+        """Run the classification heads on precomputed (frozen-CLIP) embeddings.
+
+        Because the encoder is frozen, embeddings are stable across epochs, so training
+        can precompute them once and call this directly -- skipping the expensive
+        encode step every epoch.
+        """
         return {
             "artist": self.artist_head(embeddings),
             "genre": self.genre_head(embeddings),
             "style": self.style_head(embeddings),
         }
+
+    def forward(self, pixel_values: torch.Tensor) -> dict[str, torch.Tensor]:
+        embeddings = self.encode_images(pixel_values)
+        return self.classify_embeddings(embeddings)
 
 
 def load_from_checkpoint(

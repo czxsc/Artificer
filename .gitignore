@@ -1,0 +1,43 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Virtual environments ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- OS / editor cruft ----
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
+.idea/
+.vscode/
+
+# ---- ML artifacts: large and/or regenerable, do NOT commit ----
+# Trained model checkpoints (~600MB each); rebuild via scripts/train_clip_classifier.py
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+# Retrieval embedding indexes; rebuild via scripts/build_retrieval_index.py
+outputs/retrieval/
+*.npy
+# Materialized degraded test images (up to ~39k JPEGs); rebuild via
+# scripts/materialize_degraded_test_set.py
+outputs/phase0/degraded_known_artworks/
+
+# ---- Local caches ----
+.cache/
+*.log
+
+# Kept on purpose (small, useful in diffs): split manifests, metrics JSON/CSV,
+# dataset-analysis reports, and loss/F1 plots under outputs/.
