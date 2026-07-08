@@ -1,0 +1,26 @@
+{
+  "seed": 42,
+  "sample_size": 3934,
+  "matched_to": "known_artworks_test",
+  "recipes": [
+    "gaussian_blur",
+    "strong_gaussian_blur",
+    "small_center_crop",
+    "medium_center_crop",
+    "warm_shift",
+    "desaturated",
+    "tilt_left",
+    "tilt_right",
+    "perspective_left",
+    "perspective_right"
+  ],
+  "exact_manifest": "outputs\\phase0\\exact_artworks_test_manifest.csv",
+  "exact_rows": 3934,
+  "degraded_manifest": "outputs\\phase0\\degraded_exact_artworks_manifest.csv",
+  "degraded_rows": 39340,
+  "materialize_mode": "preview",
+  "images_rendered": 40,
+  "unique_artists_in_sample": 128,
+  "unique_styles_in_sample": 25,
+  "unique_genres_in_sample": 11
+}
