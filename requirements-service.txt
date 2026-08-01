@@ -1,0 +1,18 @@
+# Runtime dependencies for the deployed FastAPI service (Phase A).
+#
+# Deliberately excludes torch/transformers/datasets: inference runs on ONNX Runtime
+# CPU, so the container image stays small enough to deploy cheaply. Anything that
+# needs torch belongs in requirements-ml.txt and runs offline.
+#
+# Floors rather than exact pins for now; pin these to the resolved versions once the
+# service image builds green.
+
+fastapi>=0.115
+uvicorn[standard]>=0.34
+python-multipart>=0.0.20   # multipart/form-data image uploads on POST /scan
+pydantic-settings>=2.7     # env-var config
+onnxruntime>=1.20          # CLIP image encoder, CPU
+numpy==2.4.2               # must match the version the index was built with
+Pillow==12.3.0
+psycopg[binary]>=3.2       # Postgres driver
+pgvector>=0.3.6            # vector type adapter for psycopg

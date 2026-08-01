@@ -1,0 +1,26 @@
+# Offline ML pipeline: dataset prep, embedding, training, evaluation.
+# NOT installed into the deploy image -- the service runs CLIP through ONNX Runtime
+# instead, which is what keeps the container small and CPU-cheap. See
+# requirements-service.txt.
+#
+# Verified on Python 3.12 (Linux) inside the project-local .venv/, managed by uv.
+#
+# GPU setup: the default `torch` on PyPI is CPU-only. Install a CUDA build INTO the
+# venv *before* the rest of these deps:
+#       uv venv --python 3.12
+#       uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+#       uv pip install -r requirements-ml.txt
+#   (Verified with torch 2.13.0+cu130 on an RTX 3090.)
+#
+# Note: scripts import `datasets` before `torch` on purpose -- importing torch first
+# triggers a DLL load-order crash with the CUDA build on Windows. Harmless on Linux,
+# kept so the scripts stay portable.
+
+torch>=2.11
+torchvision>=0.26
+numpy==2.4.2
+pandas==3.0.0
+Pillow==12.3.0
+transformers==5.12.1
+datasets==5.0.0
+matplotlib==3.11.0
